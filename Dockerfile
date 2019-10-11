@@ -2,6 +2,7 @@ FROM debian
 
 RUN apt-get update && apt-get install -y \
 bash-completion \
+curl \
 vim \
 less \
 git
@@ -15,6 +16,7 @@ ENV GIT_PS1_SHOWDIRTYSTATE true
 ENV GIT_PS1_SHOWCOLORHINTS true
 COPY dotfiles/.gitconfig /etc/gitconfig
 
-WORKDIR /root
+RUN curl -fsSL https://download.docker.com/linux/static/stable/x86_64/docker-19.03.3.tgz \
+  | tar -xzC /usr/local/bin --strip=1 docker/docker
 
 CMD [ "bash" ]
